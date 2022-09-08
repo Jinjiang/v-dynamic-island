@@ -21,8 +21,8 @@ import DemoIconCapture from './components/DemoIconCapture.vue'
   <!-- {{ width }} x {{ height }} -->
   <div class="stage">
     <DynamicIsland class="island">
-      <!-- <DemoIconApple :size="1.5" @click="expanded = !expanded" /> -->
-      <!-- <DemoIconCapture v-if="expanded" :size="3" /> -->
+      <template #left><DemoIconApple :size="1.5" /></template>
+      <template #right><DemoIconCapture :size="1.5" /></template>
     </DynamicIsland>
   </div>
 </template>
