@@ -6,11 +6,9 @@ import DemoIconApple from './components/DemoIconApple.vue'
 import DemoIconCapture from './components/DemoIconCapture.vue'
 // import Test from './components/Test.vue'
 
-// const width = window.innerWidth
-// const height = window.innerHeight
-
 const shown = ref(false)
 const warning = ref(false)
+const expanded = ref(false)
 </script>
 
 <template>
@@ -22,16 +20,22 @@ const warning = ref(false)
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <!-- {{ width }} x {{ height }} -->
   <p>
     <button @click="shown = !shown">Visible</button>
     <button @click="warning = !warning">Warn</button>
   </p>
   <!-- <Test /> -->
   <div class="stage">
-    <DynamicIsland class="island" :shown="shown" :warning="warning">
-      <template #left><DemoIconApple :size="1.5" /></template>
-      <template #right><DemoIconCapture :size="1.5" /></template>
+    <DynamicIsland
+      class="island"
+      :shown="shown"
+      :warning="warning"
+      :expanded="expanded"
+    >
+      <template #left><DemoIconApple @click="expanded = true" /></template>
+      <template #right><span>Alerm</span></template>
+      <template #expanded><span @click="expanded = false">Hello World!</span></template>
+      <!-- <template #right><DemoIconCapture :size="1.5" /></template> -->
     </DynamicIsland>
   </div>
 </template>

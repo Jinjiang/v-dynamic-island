@@ -1,4 +1,4 @@
-<script setup lang="ts">import { nextTick, ref } from 'vue';
+<script setup lang="ts">import { computed, nextTick, ref } from 'vue';
 
 defineProps({
   left: {
@@ -63,22 +63,28 @@ const bgLeftShown = ref(false)
 const rightWidth = ref(0)
 const bgRightShown = ref(false)
 
-type TransitionInit = (el: HTMLElement, done: () => void) => void
+type TransitionEventHandler = (el: HTMLElement, done: () => void) => void
 
-const initLeftSize: TransitionInit = (el, done) => {
-  // get width
+const initLeftSize: TransitionEventHandler = (el, done) => {
   const { width } = el.getBoundingClientRect()
-  // init and show bg-left
   leftWidth.value = width
   bgLeftShown.value = true
   done()
 }
-const initRightSize: TransitionInit = (el, done) => {
-  // get width
+const initRightSize: TransitionEventHandler = (el, done) => {
   const { width } = el.getBoundingClientRect()
-  // init and show bg-right
   rightWidth.value = width
   bgRightShown.value = true
+  done()
+}
+const resetLeftSize: TransitionEventHandler = (_, done) => {
+  leftWidth.value = 0
+  bgLeftShown.value = false
+  done()
+}
+const resetRightSize: TransitionEventHandler = (_, done) => {
+  rightWidth.value = 0
+  bgRightShown.value = false
   done()
 }
 </script>
@@ -90,34 +96,34 @@ const initRightSize: TransitionInit = (el, done) => {
     `layout-main-${layout}`,
     { 'layout-left-responsive': leftResponsive },
     { 'layout-right-responsive': rightResponsive },
-  ]">
+  ]" :style="{
+    '--left-width': leftWidth,
+    '--right-width': rightWidth
+  }">
     <div class="forbidden"></div>
-    <div class="content" :class="{ shown, warning, expanded }" :style="{
-      '--left-offset': `${-leftWidth}px`,
-      '--right-offset': `${-rightWidth}px`
-    }">
-      <Transition name="left" @enter="initLeftSize">
+    <div class="content" :class="{ shown, warning, expanded }">
+      <Transition name="left" @enter="initLeftSize" @leave="resetLeftSize">
         <div v-if="shown" class="left"><slot name="left" /></div>
       </Transition>
       <Transition name="bg-left">
-        <div v-if="shown && bgLeftShown" class="bg-left" :style="{
-          width: `${leftWidth}px`
-        }"></div>
+        <div v-if="bgLeftShown" class="bg-left"></div>
       </Transition>
-      <Transition name="right" @enter="initRightSize">
+      <Transition name="right" @enter="initRightSize" @leave="resetRightSize">
         <div v-if="shown" class="right"><slot name="right" /></div>
       </Transition>
       <Transition name="bg-right">
-        <div v-if="shown && bgRightShown" class="bg-right" :style="{
-          width: `${rightWidth}px`
-        }"></div>
+        <div v-if="bgRightShown" class="bg-right"></div>
       </Transition>
-      <div class="main">
-        <div class="main-left"><slot name="expanded-left" /></div>
-        <div class="main-right"><slot name="expanded-right" /></div>
-        <slot name="expanded" />
-      </div>
-      <div class="bg-main"></div>
+      <Transition name="main">
+        <div v-if="expanded" class="main">
+          <div class="main-left"><slot name="expanded-left" /></div>
+          <div class="main-right"><slot name="expanded-right" /></div>
+          <slot name="expanded" />
+        </div>
+      </Transition>
+      <Transition name="bg-main">
+        <div v-if="expanded" class="bg-main"></div>
+      </Transition>
     </div>
   </div>
 </template>
