@@ -66,30 +66,33 @@ const resetRightSize: TransitionEventHandler = (_, done) => {
     `layout-left-${left}`,
     `layout-left-${right}`,
     `layout-main-${layout}`,
-    { 'layout-left-responsive': leftResponsive },
-    { 'layout-right-responsive': rightResponsive },
+    {
+      'layout-left-responsive': leftResponsive,
+      'layout-right-responsive': rightResponsive,
+      shown, warning, expanded
+    }
   ]" :style="{
     '--left-width': leftWidth,
     '--right-width': rightWidth
   }">
     <div class="forbidden"></div>
-    <div class="content" :class="{ shown, warning, expanded }">
+    <div class="content">
       <Transition name="left" @enter="initLeftSize" @leave="resetLeftSize">
-        <div v-if="shown" class="left"><slot name="left" /></div>
+        <div v-if="shown" class="left slot"><slot name="left" /></div>
       </Transition>
       <Transition name="bg-left">
         <div v-if="shown && bgLeftShown" class="bg-left"></div>
       </Transition>
       <Transition name="right" @enter="initRightSize" @leave="resetRightSize">
-        <div v-if="shown" class="right"><slot name="right" /></div>
+        <div v-if="shown" class="right slot"><slot name="right" /></div>
       </Transition>
       <Transition name="bg-right">
         <div v-if="shown && bgRightShown" class="bg-right"></div>
       </Transition>
       <Transition name="main">
-        <div v-if="shown && expanded" class="main">
-          <div class="main-left"><slot name="expanded-left" /></div>
-          <div class="main-right"><slot name="expanded-right" /></div>
+        <div v-if="shown && expanded" class="main slot">
+          <div class="main-left slot"><slot name="expanded-left" /></div>
+          <div class="main-right slot"><slot name="expanded-right" /></div>
           <slot name="expanded" />
         </div>
       </Transition>

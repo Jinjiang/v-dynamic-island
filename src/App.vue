@@ -20,7 +20,7 @@ const expanded = ref(false)
     </a>
   </div>
   <p>
-    <button @click="shown = !shown">Visible</button>
+    <button @click="expanded = false, shown = !shown">Visible</button>
     <button @click="warning = !warning">Warn</button>
   </p>
   <div class="stage">
@@ -28,7 +28,7 @@ const expanded = ref(false)
       class="island"
       :shown="shown"
       :warning="warning"
-      :expanded="expanded"
+      :expanded="shown && expanded"
       left-responsive
     >
       <template #left><DemoIconApple @click="expanded = true" /></template>
