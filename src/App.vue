@@ -4,7 +4,6 @@ import { ref } from 'vue';
 import DynamicIsland from './components/DynamicIsland.vue'
 import DemoIconApple from './components/DemoIconApple.vue'
 import DemoIconCapture from './components/DemoIconCapture.vue'
-// import Test from './components/Test.vue'
 
 const shown = ref(false)
 const warning = ref(false)
@@ -24,18 +23,18 @@ const expanded = ref(false)
     <button @click="shown = !shown">Visible</button>
     <button @click="warning = !warning">Warn</button>
   </p>
-  <!-- <Test /> -->
   <div class="stage">
     <DynamicIsland
       class="island"
       :shown="shown"
       :warning="warning"
       :expanded="expanded"
+      left-responsive
     >
       <template #left><DemoIconApple @click="expanded = true" /></template>
       <template #right><span>Alerm</span></template>
-      <template #expanded><span @click="expanded = false">Hello World!</span></template>
-      <!-- <template #right><DemoIconCapture :size="1.5" /></template> -->
+      <template #expanded><span @click="expanded = false, shown = false">Hello World!</span></template>
+      <template #expanded-right><DemoIconCapture :size="52" /></template>
     </DynamicIsland>
   </div>
 </template>

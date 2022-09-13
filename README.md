@@ -17,6 +17,9 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 
 <!--
   TODO:
+  - decouple into files
+  - next: square, outer, max
+
   API design
   - props
     left: 'normal' | 'outer' | 'max'

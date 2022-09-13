@@ -106,23 +106,23 @@ const resetRightSize: TransitionEventHandler = (_, done) => {
         <div v-if="shown" class="left"><slot name="left" /></div>
       </Transition>
       <Transition name="bg-left">
-        <div v-if="bgLeftShown" class="bg-left"></div>
+        <div v-if="shown && bgLeftShown" class="bg-left"></div>
       </Transition>
       <Transition name="right" @enter="initRightSize" @leave="resetRightSize">
         <div v-if="shown" class="right"><slot name="right" /></div>
       </Transition>
       <Transition name="bg-right">
-        <div v-if="bgRightShown" class="bg-right"></div>
+        <div v-if="shown && bgRightShown" class="bg-right"></div>
       </Transition>
       <Transition name="main">
-        <div v-if="expanded" class="main">
+        <div v-if="shown && expanded" class="main">
           <div class="main-left"><slot name="expanded-left" /></div>
           <div class="main-right"><slot name="expanded-right" /></div>
           <slot name="expanded" />
         </div>
       </Transition>
       <Transition name="bg-main">
-        <div v-if="expanded" class="bg-main"></div>
+        <div v-if="shown && expanded" class="bg-main"></div>
       </Transition>
     </div>
   </div>
