@@ -1,4 +1,5 @@
-<script setup lang="ts">import { computed, nextTick, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 
 defineProps({
   left: {
@@ -28,35 +29,6 @@ defineProps({
   rightResponsive: Boolean,
   warning: Boolean
 })
-
-// constant:
-// - large rect, normal rect, square rect
-// - forbidden rect
-// - max side width
-// - radius, expanded radius
-// state
-// - left rect, right rect
-// - animating?
-// - blobbing?
-// computed: scaleX, scaleY, initWidth, initHeight, offsetLeft, offsetRight
-
-// transition:
-// - left/right
-//   show: get rect, get offset, _set rect to bg_, animate offset to fg/bg
-//     normal/max: translate(bounce) + fg blur + fg opacity
-//     outer: translate(bounce) + bg scale(bounce) + bg blob + fg blur + fg opacity
-//   hide: animate offset to fg/bg, _reset bg rect_
-//     translate + fg blur + fg opacity
-//   expand/collapse: get dest rect, get dest position, animate to fg, hide bg, (+ set and animate main fg/bg)
-//     _add/remove before/after_
-//     responsive ? nothing : blur + opacity
-// - main
-//   expand: get current rect/scale, _set scale to fg, set rect to bg_, animate scale to fg, animate rect to bg
-//     fg: blur, opacity, scale(bounce)
-//     bg: width(bounce), height(bounce), radius
-//   collapse: get rect/scale, animate scale to fg, animate rect to bg, _remove fg/bg_
-//     fg: blur, opacity
-//     bg: width(bounce), height, radius
 
 const leftWidth = ref(0)
 const bgLeftShown = ref(false)

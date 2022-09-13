@@ -56,13 +56,13 @@ const expanded = ref(false)
   background: white url(/background.png) top center no-repeat;
   background-size: contain;
   position: relative;
-  width: 487px; /* 974px */
-  height: 438px; /* 876px */
+  width: 487px;
+  height: 438px;
 }
 .island {
   position: absolute;
   left: 50%;
-  top: 35px; /* 71px; */
+  top: 35px;
   translate: -50% 0;
 }
 </style>

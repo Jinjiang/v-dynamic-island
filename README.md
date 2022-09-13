@@ -16,17 +16,13 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
 
 <!--
-  TODO:
-  - decouple into files
-  - next: square, outer, max
-
   API design
   - props
-    left: 'normal' | 'outer' | 'max'
-    right: 'normal' | 'outer' | 'max'
+    ?left: 'normal' | 'outer' | 'max'
+    ?right: 'normal' | 'outer' | 'max'
     shown: true | false
     expanded: true | false
-    layout: 'normal' | 'large' | 'square'
+    ?layout: 'normal' | 'large' | 'square'
     leftResponsive: true | false
     rightResponsive: true | false
     warning: true | false
@@ -37,27 +33,4 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
     expanded-left
     expanded-right
   - events
-  Internal design
-  - structure
-    content: shown -> warning
-      left: shown -> normal|outer|max, leftResponsive
-        bg-left: cover left
-      right: shown -> normal|outer|max, rightResponsive
-        bg-right: cover right
-      main: shown -> expanded -> normal|large|square
-        main-left
-        main-right
-        bg-main: cover main
-  - transition
-    warning
-      shake
-    show
-      fg(translate(bouncing) + blur)
-      bg(size/translate(bouncing) + blobbing)
-    expand
-      fg(opacity + blur + scale(bouncing))
-      bg(radius + size(bouncing))
-      left/right(scale/translate(bouncing))
-    note
-      don't bounce (top line, scale down) to avoid explosing forbidden zone
 -->
