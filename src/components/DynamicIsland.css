@@ -1,0 +1,146 @@
+/* The main container */
+
+.container {
+  min-width: 135px;
+  height: 40px;
+  position: relative;
+}
+
+.forbidden {
+  position: relative;
+  width: 135px;
+  height: 40px;
+  background-color: black;
+  border-radius: 20px;
+  z-index: 2;
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  color: white;
+  font-size: 16px;
+  z-index: 1;
+}
+
+/* Content */
+
+/* left and right */
+
+.left,
+.right {
+  position: absolute;
+  top: 0;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 0 7px; /* TBD */
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.left {
+  left: var(--left-offset, 0);
+  transition: opacity .5s ease, filter .5s ease, left .3s ease;
+}
+.right {
+  right: var(--right-offset, 0);
+  transition: opacity .5s ease, filter .5s ease, right .3s ease;
+}
+
+/* left and right: background */
+
+.bg-left,
+.bg-right {
+  position: absolute;
+  top: 0;
+  height: 40px;
+  background-color: black;
+  z-index: -1;
+}
+.bg-left {
+  left: var(--left-offset, 0);
+  transition: left .3s ease;
+  width: 40px; /* for test */
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.bg-right {
+  right: var(--right-offset, 0);
+  transition: right .3s ease;
+  width: 40px; /* for test */
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.bg-left::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 85px;
+  background-color: black;
+  transition: none;
+}
+.bg-right::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  top: 0;
+  bottom: 0;
+  width: 85px;
+  background-color: black;
+  transition: none;
+}
+
+/* left and right: animation */
+
+.left-enter-from,
+.left-leave-to {
+  left: 0;
+  opacity: 0;
+  filter: blur(4px);
+}
+
+.bg-left-enter-from,
+.bg-left-leave-to {
+  left: 0;
+}
+
+.right-enter-from,
+.right-leave-to {
+  right: 0;
+  opacity: 0;
+  filter: blur(4px);
+}
+
+.bg-right-enter-from,
+.bg-right-leave-to {
+  right: 0;
+}
+
+/* Animations */
+
+.warning {
+  animation: shake 0.1s 2;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

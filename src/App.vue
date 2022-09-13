@@ -4,9 +4,13 @@ import { ref } from 'vue';
 import DynamicIsland from './components/DynamicIsland.vue'
 import DemoIconApple from './components/DemoIconApple.vue'
 import DemoIconCapture from './components/DemoIconCapture.vue'
+// import Test from './components/Test.vue'
 
 // const width = window.innerWidth
 // const height = window.innerHeight
+
+const shown = ref(false)
+const warning = ref(false)
 </script>
 
 <template>
@@ -19,8 +23,13 @@ import DemoIconCapture from './components/DemoIconCapture.vue'
     </a>
   </div>
   <!-- {{ width }} x {{ height }} -->
+  <p>
+    <button @click="shown = !shown">Visible</button>
+    <button @click="warning = !warning">Warn</button>
+  </p>
+  <!-- <Test /> -->
   <div class="stage">
-    <DynamicIsland class="island">
+    <DynamicIsland class="island" :shown="shown" :warning="warning">
       <template #left><DemoIconApple :size="1.5" /></template>
       <template #right><DemoIconCapture :size="1.5" /></template>
     </DynamicIsland>

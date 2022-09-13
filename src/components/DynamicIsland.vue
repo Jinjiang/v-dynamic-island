@@ -1,4 +1,5 @@
-<script setup lang="ts">
+<script setup lang="ts">import { nextTick, ref } from 'vue';
+
 defineProps({
   left: {
     type: String,
@@ -56,6 +57,36 @@ defineProps({
 //   collapse: get rect/scale, animate scale to fg, animate rect to bg, _remove fg/bg_
 //     fg: blur, opacity
 //     bg: width(bounce), height, radius
+
+// left animation:
+// - trigger left v-if
+// - then get width
+// - trigger bg-left v-if
+// - animate left offset
+// - animate bg-left offset
+const leftWidth = ref(0)
+const bgLeftShown = ref(false)
+const rightWidth = ref(0)
+const bgRightShown = ref(false)
+
+type TransitionInit = (el: HTMLElement, done: () => void) => void
+
+const initLeftSize: TransitionInit = (el, done) => {
+  // get width
+  const { width } = el.getBoundingClientRect()
+  // init and show bg-left
+  leftWidth.value = width
+  bgLeftShown.value = true
+  done()
+}
+const initRightSize: TransitionInit = (el, done) => {
+  // get width
+  const { width } = el.getBoundingClientRect()
+  // init and show bg-right
+  rightWidth.value = width
+  bgRightShown.value = true
+  done()
+}
 </script>
 
 <template>
@@ -67,11 +98,26 @@ defineProps({
     { 'layout-right-responsive': rightResponsive },
   ]">
     <div class="forbidden"></div>
-    <div class="content" :class="{ shown, warning, expanded }">
-      <div class="left"><slot name="left" /></div>
-      <div class="bg-left"></div>
-      <div class="right"><slot name="right" /></div>
-      <div class="bg-right"></div>
+    <div class="content" :class="{ shown, warning, expanded }" :style="{
+      '--left-offset': `${-leftWidth}px`,
+      '--right-offset': `${-rightWidth}px`
+    }">
+      <Transition name="left" @enter="initLeftSize">
+        <div v-if="shown" class="left"><slot name="left" /></div>
+      </Transition>
+      <Transition name="bg-left">
+        <div v-if="shown && bgLeftShown" class="bg-left" :style="{
+          width: `${leftWidth}px`
+        }"></div>
+      </Transition>
+      <Transition name="right" @enter="initRightSize">
+        <div v-if="shown" class="right"><slot name="right" /></div>
+      </Transition>
+      <Transition name="bg-right">
+        <div v-if="shown && bgRightShown" class="bg-right" :style="{
+          width: `${rightWidth}px`
+        }"></div>
+      </Transition>
       <div class="main">
         <div class="main-left"><slot name="expanded-left" /></div>
         <div class="main-right"><slot name="expanded-right" /></div>
@@ -82,86 +128,4 @@ defineProps({
   </div>
 </template>
 
-<style scoped>
-.container {
-  min-width: 135px;
-  height: 40px;
-  position: relative;
-}
-
-.forbidden {
-  width: 135px;
-  height: 40px;
-  background-color: black;
-  border-radius: 20px;
-}
-
-.content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  color: white;
-  font-size: 16px;
-}
-
-.left,
-.right {
-  position: absolute;
-  top: 0;
-  height: 40px;
-  white-space: nowrap;
-  padding: 0 10px; /* temp */
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-}
-.bg-left,
-.bg-right {
-  position: absolute;
-  top: 0;
-  height: 40px;
-  background-color: black;
-  z-index: -1;
-}
-.left {
-  left: -100px; /* for test */
-}
-.bg-left {
-  left: -100px; /* for test */
-  width: 40px; /* for test */
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-}
-.right {
-  right: -100px; /* for test */
-}
-.bg-right {
-  right: -100px; /* for test */
-  width: 40px; /* for test */
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
-
-.warning {
-  animation: shake 0.1s 2;
-}
-@keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-10px);
-  }
-  50% {
-    transform: translateX(0);
-  }
-  75% {
-    transform: translateX(10px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-</style>
+<style scoped src="./DynamicIsland.css"></style>
