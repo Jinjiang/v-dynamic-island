@@ -43,11 +43,17 @@
 }
 .left {
   left: var(--left-offset, 0);
-  transition: opacity .5s ease, filter .5s ease, left .3s ease;
+  transition:
+    opacity .5s ease,
+    filter .5s ease,
+    left .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .right {
   right: var(--right-offset, 0);
-  transition: opacity .5s ease, filter .5s ease, right .3s ease;
+  transition:
+    opacity .5s ease,
+    filter .5s ease,
+    right .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* left and right: background */
@@ -62,14 +68,14 @@
 }
 .bg-left {
   left: var(--left-offset, 0);
-  transition: left .3s ease;
+  transition: left .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   width: 40px; /* for test */
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
 }
 .bg-right {
   right: var(--right-offset, 0);
-  transition: right .3s ease;
+  transition: right .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   width: 40px; /* for test */
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
@@ -132,13 +138,13 @@
     transform: translateX(0);
   }
   25% {
-    transform: translateX(-10px);
+    transform: translateX(-5px);
   }
   50% {
     transform: translateX(0);
   }
   75% {
-    transform: translateX(10px);
+    transform: translateX(5px);
   }
   100% {
     transform: translateX(0);

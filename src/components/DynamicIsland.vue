@@ -58,12 +58,6 @@ defineProps({
 //     fg: blur, opacity
 //     bg: width(bounce), height, radius
 
-// left animation:
-// - trigger left v-if
-// - then get width
-// - trigger bg-left v-if
-// - animate left offset
-// - animate bg-left offset
 const leftWidth = ref(0)
 const bgLeftShown = ref(false)
 const rightWidth = ref(0)
