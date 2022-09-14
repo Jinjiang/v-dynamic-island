@@ -34,6 +34,7 @@ const expanded = ref(false)
       <template #left><DemoIconApple @click="expanded = true" /></template>
       <template #right><span>Alerm</span></template>
       <template #expanded><span @click="expanded = false, shown = false">Hello World!</span></template>
+      <!-- <template #expanded-left><DemoIconApple :size="52" /></template> -->
       <template #expanded-right><DemoIconCapture :size="52" /></template>
     </DynamicIsland>
   </div>

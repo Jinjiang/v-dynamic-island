@@ -4,6 +4,7 @@
   --forbidden-width: 137;
   --small-height: 40;
   --small-radius: 20;
+  --small-icon: 20;
   --small-padding: 10;
   --normal-width: 406;
   --normal-height: 92;
@@ -47,15 +48,15 @@
     opacity .3s ease-out,
     filter .3s ease-out;
   --transition-pos:
-    top .2s var(--func-resize),
-    left .2s var(--func-resize),
-    right .2s var(--func-resize);
+    top .3s var(--func-resize),
+    left .3s var(--func-resize),
+    right .3s var(--func-resize);
   --transition-shape:
-    width .2s var(--func-resize),
-    height .2s var(--func-resize),
-    border-radius .2s var(--func-resize);
+    width .3s var(--func-resize),
+    height .3s var(--func-resize),
+    border-radius .3s var(--func-resize);
   --transition-transform:
-    transform .2s var(--func-resize);
+    transform .3s var(--func-resize);
 }
 
 .container {
@@ -202,22 +203,20 @@
 
 .expanded .left,
 .expanded .right {
-  top: calc(
-    (
-      var(--expanded-height) / 2 -
-      var(--small-height) / 2
-    ) * 1px
-  );
+  top: calc(var(--expanded-padding) * 1px);
+  height: calc(var(--expanded-icon) * 1px);
   transform: scale(calc(
-    var(--expanded-icon) / var(--small-radius)
+    var(--expanded-icon) / var(--small-icon)
   ));
 }
 .expanded .left {
-    left: calc(
+  left: calc(
     (
       var(--forbidden-width) / 2 +
       var(--expanded-padding) -
-      var(--expanded-width) / 2
+      var(--expanded-width) / 2 +
+      var(--expanded-icon) / 2 -
+      var(--left-width) / 2
     ) * 1px
   );
 }
@@ -226,7 +225,9 @@
     (
       var(--forbidden-width) / 2 +
       var(--expanded-padding) -
-      var(--expanded-width) / 2
+      var(--expanded-width) / 2 +
+      var(--expanded-icon) / 2 -
+      var(--right-width) / 2
     ) * 1px
   );
 }
@@ -267,6 +268,7 @@
   left: calc(var(--forbidden-width) / 2 * 1px);
   width: calc(var(--expanded-width) * 1px);
   height: calc(var(--expanded-height) * 1px);
+  padding-top: calc(var(--small-height) * 1px);
   transform: translateX(-50%);
 }
 .bg-main {
