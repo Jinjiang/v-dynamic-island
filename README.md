@@ -17,8 +17,9 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 
 <!--
   TODO:
+  - avoid bounce back
+  - expanded -> none
   - features
-    - max
     - outer
     - square
   - others

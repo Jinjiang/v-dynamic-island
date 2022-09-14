@@ -64,7 +64,7 @@ const resetRightSize: TransitionEventHandler = (_, done) => {
 <template>
   <div class="container" :class="[
     `layout-left-${left}`,
-    `layout-left-${right}`,
+    `layout-right-${right}`,
     `layout-main-${layout}`,
     {
       'layout-left-responsive': leftResponsive,

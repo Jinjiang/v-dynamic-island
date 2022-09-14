@@ -30,6 +30,7 @@ const expanded = ref(false)
       :warning="warning"
       :expanded="shown && expanded"
       left-responsive
+      right="max"
     >
       <template #left><DemoIconApple @click="expanded = true" /></template>
       <template #right><span>Alerm</span></template>
