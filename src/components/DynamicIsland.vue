@@ -78,26 +78,26 @@ const resetRightSize: TransitionEventHandler = (_, done) => {
     <div class="forbidden"></div>
     <div class="content">
       <Transition name="left" @enter="initLeftSize" @leave="resetLeftSize">
-        <div v-if="shown" class="left slot"><slot name="left" /></div>
+        <div v-if="shown" class="left slot transition"><slot name="left" /></div>
       </Transition>
       <Transition name="bg-left">
-        <div v-if="shown && bgLeftShown" class="bg-left"></div>
+        <div v-if="shown && bgLeftShown" class="bg-left transition"></div>
       </Transition>
       <Transition name="right" @enter="initRightSize" @leave="resetRightSize">
-        <div v-if="shown" class="right slot"><slot name="right" /></div>
+        <div v-if="shown" class="right slot transition"><slot name="right" /></div>
       </Transition>
       <Transition name="bg-right">
-        <div v-if="shown && bgRightShown" class="bg-right"></div>
+        <div v-if="shown && bgRightShown" class="bg-right transition"></div>
       </Transition>
       <Transition name="main">
-        <div v-if="shown && expanded" class="main slot">
+        <div v-if="shown && expanded" class="main slot transition">
           <div class="main-left slot"><slot name="expanded-left" /></div>
           <div class="main-right slot"><slot name="expanded-right" /></div>
           <slot name="expanded" />
         </div>
       </Transition>
       <Transition name="bg-main">
-        <div v-if="shown && expanded" class="bg-main"></div>
+        <div v-if="shown && expanded" class="bg-main transition"></div>
       </Transition>
     </div>
   </div>

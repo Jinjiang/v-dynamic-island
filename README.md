@@ -17,15 +17,9 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 
 <!--
   TODO:
-  - avoid bounce back
-  - expanded -> none
-  - features
-    - outer
-    - square
-  - others
-    - css vars -> v-bind
-    - more examples
-    - docs
+  - css vars -> v-bind
+  - more examples
+  - docs
 
   API design
   - props

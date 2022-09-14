@@ -1,13 +1,26 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 import DynamicIsland from './components/DynamicIsland.vue'
 import DemoIconApple from './components/DemoIconApple.vue'
-import DemoIconCapture from './components/DemoIconCapture.vue'
+import DemoIconTimer from './components/DemoIconTimer.vue'
+
+// import Test from './components/Test.vue'
 
 const shown = ref(false)
 const warning = ref(false)
 const expanded = ref(false)
+
+const props = computed(() => ({
+  shown: shown.value,
+  expanded: shown.value && expanded.value,
+  warning: warning.value,
+  leftResponsive: true,
+  // rightResponsive: true,
+  // left: 'max',
+  // right: 'max',
+  // layout: 'large',
+}))
 </script>
 
 <template>
@@ -19,24 +32,18 @@ const expanded = ref(false)
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  <!-- <Test /> -->
   <p>
     <button @click="expanded = false, shown = !shown">Visible</button>
     <button @click="warning = !warning">Warn</button>
   </p>
   <div class="stage">
-    <DynamicIsland
-      class="island"
-      :shown="shown"
-      :warning="warning"
-      :expanded="shown && expanded"
-      left-responsive
-      right="max"
-    >
+    <DynamicIsland class="island" v-bind="props">
       <template #left><DemoIconApple @click="expanded = true" /></template>
-      <template #right><span>Alerm</span></template>
+      <template #right><span>Ring</span></template>
       <template #expanded><span @click="expanded = false, shown = false">Hello World!</span></template>
       <!-- <template #expanded-left><DemoIconApple :size="52" /></template> -->
-      <template #expanded-right><DemoIconCapture :size="52" /></template>
+      <template #expanded-right><DemoIconTimer :size="52" /></template>
     </DynamicIsland>
   </div>
 </template>
