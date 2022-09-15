@@ -1,32 +1,40 @@
 /* The main container */
 
 .container {
+  --device-width: 430;
+  --expanded-margin: 22;
   --forbidden-width: 137;
   --small-max-width: 348;
   --small-height: 40;
   --small-radius: 20;
   --small-icon: 20;
   --small-padding: 10;
-  --normal-width: 406;
   --normal-height: 92;
   --normal-radius: 46;
   --normal-icon: 52;
   --normal-padding: 20;
-  --large-width: 406;
   --large-height: 220;
   --large-radius: 46;
   --large-icon: 72;
   --large-padding: 25;
+  --expanded-width: calc(
+    var(--device-width) -
+    var(--expanded-margin) * 2
+  );
+}
+.container.device-promax {
+  --device-width: 430;
+}
+.container.device-pro {
+  --device-width: 393;
 }
 .container.layout-main-normal {
-  --expanded-width: var(--normal-width);
   --expanded-height: var(--normal-height);
   --expanded-radius: var(--normal-radius);
   --expanded-icon: var(--normal-icon);
   --expanded-padding: var(--normal-padding);
 }
 .container.layout-main-large {
-  --expanded-width: var(--large-width);
   --expanded-height: var(--large-height);
   --expanded-radius: var(--large-radius);
   --expanded-icon: var(--large-icon);

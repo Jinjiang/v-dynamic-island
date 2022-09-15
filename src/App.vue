@@ -11,6 +11,8 @@ const shown = ref(false)
 const warning = ref(false)
 const expanded = ref(false)
 
+const hasBackground = window.innerWidth > 430
+
 const props = computed(() => ({
   shown: shown.value,
   expanded: shown.value && expanded.value,
@@ -33,11 +35,11 @@ const props = computed(() => ({
     </a>
   </div>
   <!-- <Test /> -->
-  <p>
-    <button @click="expanded = false, shown = !shown">Visible</button>
-    <button @click="warning = !warning">Warn</button>
-  </p>
-  <div class="stage">
+  <div class="controls">
+    <p><button @click="expanded = false, shown = !shown, warning = false">Visible</button></p>
+    <p><button :disabled="!shown || warning" @click="warning = true">Warn</button></p>
+  </div>
+  <div class="stage" :class="{ 'has-background': hasBackground }">
     <DynamicIsland class="island" v-bind="props">
       <template #left><DemoIconApple @click="expanded = true" /></template>
       <template #right><span>Ring</span></template>
@@ -62,12 +64,17 @@ const props = computed(() => ({
 }
 
 .stage {
+  position: relative;
+  width: 100%;
+  height: 438px;
+}
+.stage.has-background {
   background: white url(/background.png) top center no-repeat;
   background-size: contain;
-  position: relative;
   width: 487px;
   height: 438px;
 }
+
 .island {
   position: absolute;
   left: 50%;

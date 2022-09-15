@@ -2,6 +2,10 @@
 import { ref } from 'vue';
 
 defineProps({
+  deviceWidth: {
+    type: Number,
+    default: Math.min(430, window.innerWidth)
+  },
   left: {
     type: String,
     default: 'normal',
@@ -73,7 +77,8 @@ const resetRightSize: TransitionEventHandler = (_, done) => {
     }
   ]" :style="{
     '--left-width': leftWidth,
-    '--right-width': rightWidth
+    '--right-width': rightWidth,
+    '--device-width': deviceWidth
   }">
     <div class="forbidden"></div>
     <div class="content">
