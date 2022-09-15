@@ -4,7 +4,6 @@ import { computed, ref } from 'vue';
 import DynamicIsland from './components/DynamicIsland.vue'
 import DemoIconApple from './components/DemoIconApple.vue'
 import DemoIconTimer from './components/DemoIconTimer.vue'
-
 // import Test from './components/Test.vue'
 
 const shown = ref(false)
@@ -17,8 +16,7 @@ const props = computed(() => ({
   shown: shown.value,
   expanded: shown.value && expanded.value,
   warning: warning.value,
-  superLeading: {},
-  // superTrailing: {},
+  superLeading: true
 }))
 </script>
 
@@ -38,15 +36,20 @@ const props = computed(() => ({
   </div>
   <div class="stage" :class="{ 'has-background': hasBackground }">
     <DynamicIsland class="island" v-bind="props">
-      <template #leading><DemoIconApple @click="expanded = true" style="padding: 10px" /></template>
-      <template #trailing><div style="padding: 10px">Ring</div></template>
+      <template #leading>
+        <DemoIconApple @click="expanded = true" style="padding: 10px" />
+      </template>
+      <template #trailing>
+        <div style="padding: 10px">Ring</div>
+      </template>
       <template #expanded>
         <div @click="expanded = false, shown = false">
           Hello World!
         </div>
       </template>
-      <!-- <template #expanded-leading><DemoIconApple :size="52" /></template> -->
-      <template #expanded-trailing><DemoIconTimer :size="60" style="padding: 10px" /></template>
+      <template #expanded-trailing>
+        <DemoIconTimer :size="60" style="padding: 10px" />
+      </template>
     </DynamicIsland>
   </div>
 </template>

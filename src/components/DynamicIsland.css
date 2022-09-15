@@ -267,7 +267,6 @@
   filter: blur(4px);
 }
 
-/* TODO: z-index */
 .expanded.super-leading .leading,
 .expanded.super-trailing .trailing {
   opacity: 1;
@@ -300,9 +299,11 @@
   padding-top: calc(var(--compat-height) * 1px);
   transform: translateX(-50%);
   transform-origin: top center;
+  border-radius: calc(var(--expanded-radius) * 1px);
+  overflow: hidden;
 }
 .main {
-  align-items: flex-start;
+  flex-direction: column;
 }
 .main.active-transition {
   height: calc(var(--expanded-height) * 1px);
@@ -311,7 +312,6 @@
   z-index: -1;
   height: calc(var(--expanded-height) * 1px);
   background-color: black;
-  border-radius: calc(var(--expanded-radius) * 1px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, .5);
 }
 
@@ -334,7 +334,6 @@
   --func-resize: ease-out;
 }
 
-/* TODO: test translateX */
 .main-enter-from,
 .main-leave-to {
   opacity: 0;
