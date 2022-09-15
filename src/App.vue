@@ -17,11 +17,8 @@ const props = computed(() => ({
   shown: shown.value,
   expanded: shown.value && expanded.value,
   warning: warning.value,
-  leftResponsive: true,
-  // rightResponsive: true,
-  // left: 'max',
-  // right: 'max',
-  // layout: 'large',
+  superLeading: {},
+  // superTrailing: {},
 }))
 </script>
 
@@ -41,11 +38,11 @@ const props = computed(() => ({
   </div>
   <div class="stage" :class="{ 'has-background': hasBackground }">
     <DynamicIsland class="island" v-bind="props">
-      <template #left><DemoIconApple @click="expanded = true" /></template>
-      <template #right><span>Ring</span></template>
+      <template #leading><DemoIconApple @click="expanded = true" /></template>
+      <template #trailing><span>Ring</span></template>
       <template #expanded><span @click="expanded = false, shown = false">Hello World!</span></template>
-      <!-- <template #expanded-left><DemoIconApple :size="52" /></template> -->
-      <template #expanded-right><DemoIconTimer :size="52" /></template>
+      <!-- <template #expanded-leading><DemoIconApple :size="52" /></template> -->
+      <template #expanded-trailing><DemoIconTimer :size="52" /></template>
     </DynamicIsland>
   </div>
 </template>
