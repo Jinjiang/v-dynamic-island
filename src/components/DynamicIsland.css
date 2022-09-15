@@ -67,7 +67,8 @@
   --transition-shape:
     width var(--duration) var(--func-resize),
     height var(--duration) var(--func-resize),
-    border-radius var(--duration) var(--func-resize);
+    border-radius var(--duration) var(--func-resize),
+    box-shadow var(--duration) ease-out;
   --transition-transform:
     transform var(--duration) var(--func-resize);
 }
@@ -294,22 +295,33 @@
   box-sizing: border-box;
   left: calc(var(--forbidden-width) / 2 * 1px);
   width: calc(var(--expanded-width) * 1px);
-  height: calc(var(--expanded-height) * 1px);
   min-height: calc(var(--expanded-min-height) * 1px);
   padding: calc(var(--expanded-padding) * 1px);
   padding-top: calc(var(--compat-height) * 1px);
   transform: translateX(-50%);
+  transform-origin: top center;
 }
 .main {
   align-items: flex-start;
 }
+.main.active-transition {
+  height: calc(var(--expanded-height) * 1px);
+}
 .main-bg {
   z-index: -1;
+  height: calc(var(--expanded-height) * 1px);
   background-color: black;
   border-radius: calc(var(--expanded-radius) * 1px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .5);
 }
 
+/* main: animation */
+
 .main {
+  transition:
+    var(--transition-blur);
+}
+.main.active-transition {
   transition:
     var(--transition-blur),
     var(--transition-transform);
@@ -325,15 +337,17 @@
 /* TODO: test translateX */
 .main-enter-from,
 .main-leave-to {
+  opacity: 0;
+  filter: blur(4px);
+}
+.main-enter-from.active-transition,
+.main-leave-to {
   transform:
     translateX(-50%)
     scale(
       calc(var(--compat-width) / var(--expanded-width)),
       calc(var(--compat-height) / var(--expanded-height))
     );
-  transform-origin: top center;
-  opacity: 0;
-  filter: blur(4px);
 }
 
 .main-bg-enter-from,

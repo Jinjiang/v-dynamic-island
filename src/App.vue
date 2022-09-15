@@ -40,7 +40,11 @@ const props = computed(() => ({
     <DynamicIsland class="island" v-bind="props">
       <template #leading><DemoIconApple @click="expanded = true" style="padding: 10px" /></template>
       <template #trailing><div style="padding: 10px">Ring</div></template>
-      <template #expanded><span @click="expanded = false, shown = false">Hello World!</span></template>
+      <template #expanded>
+        <div @click="expanded = false, shown = false">
+          Hello World!
+        </div>
+      </template>
       <!-- <template #expanded-leading><DemoIconApple :size="52" /></template> -->
       <template #expanded-trailing><DemoIconTimer :size="60" style="padding: 10px" /></template>
     </DynamicIsland>
