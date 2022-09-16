@@ -17,9 +17,7 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 
 <!--
   TODO:
-  - bug: leading/trailing not synced to main when back
   - bug: unbalanced leading/trailing
-  - bug: normal leading/trailing slot + behavior
   - demo: select -> multiple examples
   - docs
   - package & publish

@@ -43,7 +43,7 @@ const props = computed(() => ({
         <div style="padding: 10px">Ring</div>
       </template>
       <template #expanded>
-        <div @click="expanded = false, shown = false">
+        <div @click="expanded = false">
           Hello World!
         </div>
       </template>

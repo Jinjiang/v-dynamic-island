@@ -30,42 +30,47 @@ const getRectProp = (rect: boolean | Rect | undefined, key: keyof Rect) => {
   return rect[key]
 }
 
-const leadingWidth = ref(0)
-const leadingBgShown = ref(false)
-
 type TransitionEventHandler = (el: HTMLElement, done: () => void) => void
+
+const leadingWidth = ref(0)
+const leadingReady = ref(false)
 
 const initLeadingSize: TransitionEventHandler = (el, done) => {
   const { width } = el.getBoundingClientRect()
   leadingWidth.value = width
-  leadingBgShown.value = true
   done()
+  setTimeout(() => {
+    leadingReady.value = true
+  })
 }
 
 const trailingWidth = ref(0)
-const trailingBgShown = ref(false)
+const trailingReady = ref(false)
 
 const initTrailingSize: TransitionEventHandler = (el, done) => {
   const { width } = el.getBoundingClientRect()
   trailingWidth.value = width
-  trailingBgShown.value = true
   done()
+  setTimeout(() => {
+    trailingReady.value = true
+  })
 }
 
 const DEFAULT_EXPANDED_HEIGHT = 92
 
 const mainHeight = ref(DEFAULT_EXPANDED_HEIGHT)
-const mainShown = ref(false)
+const mainReady = ref(false)
 
 const initMainSize: TransitionEventHandler = (el, done) => {
   const { height } = el.getBoundingClientRect()
   mainHeight.value = Math.max(height, DEFAULT_EXPANDED_HEIGHT)
-  mainShown.value = true
   done()
+  setTimeout(() => {
+    mainReady.value = true
+  })
 }
 const resetMainSize: TransitionEventHandler = () => {
-  mainHeight.value = DEFAULT_EXPANDED_HEIGHT
-  mainShown.value = false
+  mainReady.value = false
 }
 </script>
 
@@ -74,12 +79,15 @@ const resetMainSize: TransitionEventHandler = () => {
     {
       'super-leading': superLeading,
       'super-trailing': superTrailing,
-      shown, warning, expanded
+      shown, warning, expanded,
+      'leading-ready': leadingReady,
+      'trailing-ready': trailingReady,
+      'main-ready': mainReady
     }
   ]" :style="{
     '--leading-width': leadingWidth,
     '--trailing-width': trailingWidth,
-    '--expanded-height': mainHeight,
+    '--main-height': mainHeight,
     '--device-width': deviceWidth,
     '--expanded-leading-size': getRectProp(superLeading, 'size'),
     '--expanded-leading-top': getRectProp(superLeading, 'top'),
@@ -90,48 +98,40 @@ const resetMainSize: TransitionEventHandler = () => {
   }">
     <div class="forbidden"></div>
     <div class="content">
-      <Transition
-        name="leading"
-        @enter="initLeadingSize"
-        @leave="leadingBgShown = false"
-        @after-leave="leadingWidth = 0"
-      >
-        <div v-if="shown" class="leading slot transition"><slot name="leading" /></div>
+
+      <Transition name="leading" @enter="initLeadingSize">
+        <div v-if="shown" class="leading slot transition">
+          <slot name="leading" />
+        </div>
       </Transition>
       <Transition name="leading-bg">
-        <div v-if="shown && leadingBgShown" class="leading-bg transition"></div>
+        <div v-if="shown" class="leading-bg transition"></div>
       </Transition>
-      <Transition
-        name="trailing"
-        @enter="initTrailingSize"
-        @leave="trailingBgShown = false"
-        @after-leave="trailingWidth = 0"
-      >
-        <div v-if="shown" class="trailing slot transition"><slot name="trailing" /></div>
+
+      <Transition name="trailing" @enter="initTrailingSize">
+        <div v-if="shown" class="trailing slot transition">
+          <slot name="trailing" />
+        </div>
       </Transition>
       <Transition name="trailing-bg">
-        <div v-if="shown && trailingBgShown" class="trailing-bg transition"></div>
+        <div v-if="shown" class="trailing-bg transition"></div>
       </Transition>
-      <Transition
-        name="main"
-        @enter="initMainSize"
-        @after-leave="resetMainSize"
-      >
-        <div
-          v-if="shown && expanded"
-          class="main slot transition"
-          :class="{ 'active-transition': mainShown }"
-        >
-          <div class="main-leading slot"><slot name="expanded-leading" /></div>
-          <div class="main-trailing slot"><slot name="expanded-trailing" /></div>
+
+      <Transition name="main" @enter="initMainSize" @after-leave="resetMainSize">
+        <div v-if="shown && expanded" class="main slot transition">
+
+          <div class="main-leading slot">
+            <slot name="expanded-leading" />
+          </div>
+          <div class="main-trailing slot">
+            <slot name="expanded-trailing" />
+          </div>
           <slot name="expanded" />
+
         </div>
       </Transition>
       <Transition name="main-bg">
-        <div
-          v-if="shown && expanded"
-          class="main-bg transition"
-        ></div>
+        <div v-if="shown && expanded" class="main-bg transition"></div>
       </Transition>
     </div>
   </div>
