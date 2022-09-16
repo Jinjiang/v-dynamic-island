@@ -14,10 +14,14 @@ export type Props = {
   superLeading?: boolean | Rect
   superTrailing?: boolean | Rect
 }
+
+type TransitionEventHandler = (el: HTMLElement, done: () => void) => void
 </script>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+
+// Props
 
 withDefaults(defineProps<Props>(), {
   deviceWidth: Math.min(430, window.innerWidth)
@@ -30,7 +34,7 @@ const getRectProp = (rect: boolean | Rect | undefined, key: keyof Rect) => {
   return rect[key]
 }
 
-type TransitionEventHandler = (el: HTMLElement, done: () => void) => void
+// Leading size
 
 const leadingWidth = ref(0)
 const leadingReady = ref(false)
@@ -44,6 +48,8 @@ const initLeadingSize: TransitionEventHandler = (el, done) => {
   })
 }
 
+// Trailing size
+
 const trailingWidth = ref(0)
 const trailingReady = ref(false)
 
@@ -55,6 +61,8 @@ const initTrailingSize: TransitionEventHandler = (el, done) => {
     trailingReady.value = true
   })
 }
+
+// Main size
 
 const DEFAULT_EXPANDED_HEIGHT = 92
 
@@ -97,6 +105,7 @@ const resetMainSize: TransitionEventHandler = () => {
     '--expanded-trailing-right': getRectProp(superTrailing, 'right'),
   }">
     <div class="forbidden"></div>
+
     <div class="content">
 
       <Transition name="leading" @enter="initLeadingSize">

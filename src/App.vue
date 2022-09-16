@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-
-import DynamicIsland from './components/DynamicIsland.vue'
-import DemoIconApple from './components/DemoIconApple.vue'
-import DemoIconTimer from './components/DemoIconTimer.vue'
+import { ref } from 'vue';
+import DemoA from './examples/DemoA.vue';
+import DemoB from './examples/DemoB.vue';
+import DemoC from './examples/DemoC.vue';
 // import Test from './components/Test.vue'
 
 const shown = ref(false)
@@ -12,12 +11,12 @@ const expanded = ref(false)
 
 const hasBackground = window.innerWidth > 430
 
-const props = computed(() => ({
-  shown: shown.value,
-  expanded: shown.value && expanded.value,
-  warning: warning.value,
-  superLeading: true
-}))
+const key = ref('A')
+const updateDemo = () => {
+  shown.value = false
+  warning.value = false
+  expanded.value = false
+}
 </script>
 
 <template>
@@ -31,26 +30,36 @@ const props = computed(() => ({
   </div>
   <!-- <Test /> -->
   <div class="controls">
+    <p><select v-model="key" @change="updateDemo">
+      <option value="A" selected>Demo A</option>
+      <option value="B" selected>Demo B</option>
+      <option value="C" selected>Demo C</option>
+    </select></p>
     <p><button @click="expanded = false, shown = !shown, warning = false">Visible</button></p>
     <p><button :disabled="!shown || warning || expanded" @click="warning = true">Warn</button></p>
   </div>
   <div class="stage" :class="{ 'has-background': hasBackground }">
-    <DynamicIsland class="island" v-bind="props">
-      <template #leading>
-        <DemoIconApple @click="expanded = true" style="padding: 10px" />
-      </template>
-      <template #trailing>
-        <div style="padding: 10px">Ring</div>
-      </template>
-      <template #expanded>
-        <div @click="expanded = false">
-          Hello World!
-        </div>
-      </template>
-      <template #expanded-trailing>
-        <DemoIconTimer :size="60" style="padding: 10px" />
-      </template>
-    </DynamicIsland>
+    <DemoA
+      v-if="key === 'A'"
+      :shown="shown"
+      :warning="warning"
+      :expanded="expanded"
+      @expand="expanded = true"
+      @collapse="expanded = false" />
+    <DemoB
+      v-else-if="key === 'B'"
+      :shown="shown"
+      :warning="warning"
+      :expanded="expanded"
+      @expand="expanded = true"
+      @collapse="expanded = false" />
+    <DemoC
+      v-else-if="key === 'C'"
+      :shown="shown"
+      :warning="warning"
+      :expanded="expanded"
+      @expand="expanded = true"
+      @collapse="expanded = false" />
   </div>
 </template>
 
