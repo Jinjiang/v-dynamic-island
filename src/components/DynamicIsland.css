@@ -313,8 +313,6 @@
   box-sizing: border-box;
   left: calc(var(--forbidden-width) / 2 * 1px);
   width: calc(var(--expanded-width) * 1px);
-  padding: calc(var(--expanded-padding) * 1px);
-  padding-top: calc(var(--compat-height) * 1px);
   transform: translateX(-50%);
   transform-origin: top center;
   border-radius: calc(var(--expanded-radius) * 1px);
@@ -322,6 +320,8 @@
 }
 .main {
   flex-direction: column;
+  padding: calc(var(--expanded-padding) * 1px);
+  padding-top: calc(var(--compat-height) * 1px);
 }
 .main.active-transition {
   height: calc(var(--expanded-height) * 1px);
