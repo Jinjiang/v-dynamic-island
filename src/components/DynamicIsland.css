@@ -12,7 +12,6 @@
   --compat-size: 40;
   --compat-max-width: 348;
 
-  --expanded-min-height: 92;
   --expanded-margin: 22;
   --expanded-padding: 10;
   --expanded-radius: 46;
@@ -54,6 +53,11 @@
   --duration: .2s;
   --func-resize: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+.debugger .container {
+  --duration: 1s;
+  /* --duration: 5s; */
+  /* --duration: 50s; */
+}
 
 .container,
 .transition {
@@ -86,6 +90,9 @@
   background-color: black;
   border-radius: calc(var(--compat-radius) * 1px);
   z-index: 2;
+}
+.debugger .forbidden {
+  opacity: 0.5;
 }
 
 .content {
@@ -125,6 +132,10 @@
 }
 .trailing {
   right: calc(var(--trailing-offset, 0) * -1px);
+}
+.debugger .leading,
+.debugger .trailing {
+  outline: red solid 1px;
 }
 
 /* leading & trailing: background */
@@ -176,13 +187,21 @@
   right: calc(var(--compat-radius) * 1px);
 }
 
+.debugger .leading-bg,
+.debugger .trailing-bg,
+.debugger .leading-bg::after,
+.debugger .trailing-bg::after {
+  background-color: rgba(0, 255, 255, .5);
+}
+
 /* leading & trailing: animation */
 
 .leading,
 .trailing {
   transition:
     var(--transition-blur),
-    var(--transition-pos);
+    var(--transition-pos),
+    transform var(--duration) var(--func-resize);
 }
 .leading-leave-active,
 .trailing-leave-active {
@@ -250,7 +269,7 @@
       var(--forbidden-width) / 2 +
       var(--expanded-trailing-right) -
       var(--expanded-width) / 2 +
-      var(--expanded-trailing) / 2 -
+      var(--expanded-trailing-size) / 2 -
       var(--trailing-width) / 2
     ) * 1px
   );
@@ -278,7 +297,7 @@
   transition:
     var(--transition-blur),
     var(--transition-pos),
-    transform .2s var(--func-resize);
+    transform var(--duration) var(--func-resize);
 }
 .expanded .leading-leave-active,
 .expanded .trailing-leave-active {
@@ -294,7 +313,6 @@
   box-sizing: border-box;
   left: calc(var(--forbidden-width) / 2 * 1px);
   width: calc(var(--expanded-width) * 1px);
-  min-height: calc(var(--expanded-min-height) * 1px);
   padding: calc(var(--expanded-padding) * 1px);
   padding-top: calc(var(--compat-height) * 1px);
   transform: translateX(-50%);
@@ -313,6 +331,12 @@
   height: calc(var(--expanded-height) * 1px);
   background-color: black;
   box-shadow: 0 10px 20px rgba(0, 0, 0, .5);
+}
+.debugger .main {
+  outline: red solid 1px;
+}
+.debugger .main-bg {
+  background-color: rgba(0, 255, 255, .5);
 }
 
 /* main: animation */
@@ -352,7 +376,6 @@
 .main-bg-enter-from,
 .main-bg-leave-to {
   height: calc(var(--compat-height) * 1px);
-  min-height: calc(var(--compat-height) * 1px);
   border-radius: calc(var(--compat-radius) * 1px);
 }
 .main-bg-enter-from {
@@ -379,6 +402,14 @@
   top: calc(var(--expanded-trailing-top) * 1px);
   right: calc(var(--expanded-trailing-right) * 1px);
   height: calc(var(--expanded-trailing-size) * 1px);
+}
+.main-leading:empty,
+.main-trailing:empty {
+  display: none;
+}
+.debugger .main-leading,
+.debugger .main-trailing {
+  outline: red solid 1px;
 }
 
 /* Animations */

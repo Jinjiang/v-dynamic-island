@@ -17,6 +17,9 @@ You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/
 
 <!--
   TODO:
+  - bug: main -> expanded (no size transition)
+  - bug: main -> hide (no transition)
+  - bug: main-bg -> hide (wrong leave height)
   - unbalanced leading/trailing
   - normal leading/trailing slot + behavior
   - select -> multiple examples

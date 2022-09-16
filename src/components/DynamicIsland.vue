@@ -41,11 +41,6 @@ const initLeadingSize: TransitionEventHandler = (el, done) => {
   leadingBgShown.value = true
   done()
 }
-const resetLeadingSize: TransitionEventHandler = (_, done) => {
-  leadingWidth.value = 0
-  leadingBgShown.value = false
-  done()
-}
 
 const trailingWidth = ref(0)
 const trailingBgShown = ref(false)
@@ -56,11 +51,6 @@ const initTrailingSize: TransitionEventHandler = (el, done) => {
   trailingBgShown.value = true
   done()
 }
-const resetTrailingSize: TransitionEventHandler = (_, done) => {
-  trailingWidth.value = 0
-  trailingBgShown.value = false
-  done()
-}
 
 const DEFAULT_EXPANDED_HEIGHT = 92
 
@@ -69,7 +59,7 @@ const mainShown = ref(false)
 
 const initMainSize: TransitionEventHandler = (el, done) => {
   const { height } = el.getBoundingClientRect()
-  mainHeight.value = height
+  mainHeight.value = Math.max(height, DEFAULT_EXPANDED_HEIGHT)
   mainShown.value = true
   done()
 }
@@ -101,13 +91,23 @@ const resetMainSize: TransitionEventHandler = (_, done) => {
   }">
     <div class="forbidden"></div>
     <div class="content">
-      <Transition name="leading" @enter="initLeadingSize" @leave="resetLeadingSize">
+      <Transition
+        name="leading"
+        @enter="initLeadingSize"
+        @leave="leadingBgShown = false"
+        @after-leave="leadingWidth = 0"
+      >
         <div v-if="shown" class="leading slot transition"><slot name="leading" /></div>
       </Transition>
       <Transition name="leading-bg">
         <div v-if="shown && leadingBgShown" class="leading-bg transition"></div>
       </Transition>
-      <Transition name="trailing" @enter="initTrailingSize" @leave="resetTrailingSize">
+      <Transition
+        name="trailing"
+        @enter="initTrailingSize"
+        @leave="trailingBgShown = false"
+        @after-leave="trailingWidth = 0"
+      >
         <div v-if="shown" class="trailing slot transition"><slot name="trailing" /></div>
       </Transition>
       <Transition name="trailing-bg">
