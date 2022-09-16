@@ -345,7 +345,8 @@
   transition:
     var(--transition-blur);
 }
-.main.active-transition {
+.main.active-transition,
+.main.main-enter-to {
   transition:
     var(--transition-blur),
     var(--transition-transform);

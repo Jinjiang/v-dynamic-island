@@ -63,10 +63,9 @@ const initMainSize: TransitionEventHandler = (el, done) => {
   mainShown.value = true
   done()
 }
-const resetMainSize: TransitionEventHandler = (_, done) => {
+const resetMainSize: TransitionEventHandler = () => {
   mainHeight.value = DEFAULT_EXPANDED_HEIGHT
   mainShown.value = false
-  done()
 }
 </script>
 
@@ -113,7 +112,11 @@ const resetMainSize: TransitionEventHandler = (_, done) => {
       <Transition name="trailing-bg">
         <div v-if="shown && trailingBgShown" class="trailing-bg transition"></div>
       </Transition>
-      <Transition name="main" @enter="initMainSize" @leave="resetMainSize">
+      <Transition
+        name="main"
+        @enter="initMainSize"
+        @after-leave="resetMainSize"
+      >
         <div
           v-if="shown && expanded"
           class="main slot transition"

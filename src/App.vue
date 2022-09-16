@@ -34,7 +34,7 @@ const props = computed(() => ({
     <p><button @click="expanded = false, shown = !shown, warning = false">Visible</button></p>
     <p><button :disabled="!shown || warning || expanded" @click="warning = true">Warn</button></p>
   </div>
-  <div class="stage debugger" :class="{ 'has-background': hasBackground }">
+  <div class="stage" :class="{ 'has-background': hasBackground }">
     <DynamicIsland class="island" v-bind="props">
       <template #leading>
         <DemoIconApple @click="expanded = true" style="padding: 10px" />
