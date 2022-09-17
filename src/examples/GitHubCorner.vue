@@ -1,3 +1,5 @@
+<!-- https://github.com/tholman/github-corners -->
+
 <script lang="ts" setup>
 defineProps(['url'])
 </script>
