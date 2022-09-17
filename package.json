@@ -1,5 +1,5 @@
 {
-  "name": "vue-dynamic-island",
+  "name": "v-dynamic-island",
   "version": "0.1.0",
   "description": "A Vue (3.x) implementation of Dynamic Island.",
   "keywords": [
@@ -9,13 +9,13 @@
   ],
   "author": "Jinjiang <zhaojinjiang@me.com>",
   "license": "MIT",
-  "homepage": "https://github.com/Jinjiang/vue-dynamic-island",
+  "homepage": "https://github.com/Jinjiang/v-dynamic-island",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jinjiang/vue-dynamic-island.git"
+    "url": "git+https://github.com/Jinjiang/v-dynamic-island.git"
   },
   "bugs": {
-    "url": "https://github.com/Jinjiang/vue-dynamic-island/issues"
+    "url": "https://github.com/Jinjiang/v-dynamic-island/issues"
   },
   "type": "module",
   "main": "./dist/dynamic-island.umd.cjs",

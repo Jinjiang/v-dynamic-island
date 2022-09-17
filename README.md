@@ -7,7 +7,7 @@ A Vue (3.x) implementation of Dynamic Island.
 Install first:
 
 ```bash
-pnpm install vue-dynamic-island
+pnpm install v-dynamic-island
 ```
 
 Then import into your Vue project:
@@ -15,8 +15,8 @@ Then import into your Vue project:
 ```vue
 <script setup>
 import { ref } from 'vue'
-import DynamicIsland from 'vue-dynamic-island'
-import 'vue-dynamic-island/style.css'
+import DynamicIsland from 'v-dynamic-island'
+import 'v-dynamic-island/style.css'
 
 // to control the display
 const shown = ref(false)
@@ -52,7 +52,7 @@ To be notice that the "little-pill" core area (roughly `137px` x `40px`) of the 
 
 ## Live examples
 
-https://jinjiang.dev/vue-dynamic-island
+https://jinjiang.dev/v-dynamic-island
 
 ## Basic APIs
 

@@ -66,7 +66,7 @@ const updateDemo = () => {
       @collapse="expanded = false" />
   </div>
   <p class="credits">The iPhone background image is from apple.com.</p>
-  <GitHubCorner url="https://github.com/Jinjiang/vue-dynamic-island" />
+  <GitHubCorner url="https://github.com/Jinjiang/v-dynamic-island" />
 </template>
 
 <style scoped>
