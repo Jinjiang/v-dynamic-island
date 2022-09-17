@@ -16,6 +16,7 @@ Then import into your Vue project:
 <script setup>
 import { ref } from 'vue'
 import DynamicIsland from 'vue-dynamic-island'
+import 'vue-dynamic-island/style.css'
 
 // to control the display
 const shown = ref(false)

@@ -1,11 +1,37 @@
 {
   "name": "vue-dynamic-island",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "A Vue (3.x) implementation of Dynamic Island.",
+  "keywords": [
+    "vue",
+    "dynamic-island",
+    "component"
+  ],
+  "author": "Jinjiang <zhaojinjiang@me.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/Jinjiang/vue-dynamic-island",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jinjiang/vue-dynamic-island.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jinjiang/vue-dynamic-island/issues"
+  },
   "type": "module",
+  "main": "./dist/dynamic-island.umd.cjs",
+  "module": "./dist/dynamic-island.js",
+  "exports": {
+    ".": {
+      "import": "./dist/dynamic-island.js",
+      "require": "./dist/dynamic-island.umd.cjs"
+    },
+    "./style.css": "./dist/style.css",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "docs": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --noEmit && vite build --config vite.config.lib.ts",
     "preview": "vite preview"
   },
   "dependencies": {

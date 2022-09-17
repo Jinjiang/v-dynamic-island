@@ -4,6 +4,8 @@ import GitHubCorner from './examples/GitHubCorner.vue';
 import DemoA from './examples/DemoA.vue';
 import DemoB from './examples/DemoB.vue';
 import DemoC from './examples/DemoC.vue';
+// import DynamicIsland from '../../dist/dynamic-island.js';
+// import '../../dist/style.css';
 // import Test from './components/Test.vue'
 
 const shown = ref(false)
@@ -63,6 +65,7 @@ const updateDemo = () => {
       @expand="expanded = true"
       @collapse="expanded = false" />
   </div>
+  <p class="credits">The iPhone background image is from apple.com.</p>
   <GitHubCorner url="https://github.com/Jinjiang/vue-dynamic-island" />
 </template>
 
@@ -85,7 +88,7 @@ const updateDemo = () => {
   height: 438px;
 }
 .stage.has-background {
-  background: white url(/background.png) top center no-repeat;
+  background: white url(./assets/background.png) top center no-repeat;
   background-size: contain;
   width: 487px;
   height: 438px;
@@ -96,5 +99,11 @@ const updateDemo = () => {
   left: 50%;
   top: 35px;
   translate: -50% 0;
+}
+
+.credits {
+  font-size: 0.8em;
+  text-align: center;
+  color:#42b883aa;
 }
 </style>
