@@ -45,8 +45,8 @@
 /* variables: transition */
 
 .container {
-  --duration: .2s;
-  --func-resize: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --duration: .4s;
+  --func-resize: cubic-bezier(.25,1,.52,1.1);
 }
 .transition {
   --transition-blur:
@@ -468,7 +468,7 @@
 /* warning */
 
 .warning > .content {
-  animation: shake 0.1s 2;
+  animation: shake 0.2s 2;
 }
 
 @keyframes shake {

@@ -20,6 +20,7 @@ const updateDemo = () => {
 </script>
 
 <template>
+  <h1>Vue Dynamic Island</h1>
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
