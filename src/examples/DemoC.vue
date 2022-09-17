@@ -20,13 +20,13 @@ const emit = defineEmits(['expand', 'collapse'])
     expanded: shown && expanded,
     warning,
     superLeading: {
-      top: 10,
-      left: 0,
+      top: 60,
+      left: 60,
       size: 100
     }
   }">
     <template #leading>
-      <Avatar @click="emit('expand')" style="padding: 10px" />
+      <Avatar @click="emit('expand')" />
     </template>
     <template #trailing>
       <div style="padding: 10px">Ring</div>
