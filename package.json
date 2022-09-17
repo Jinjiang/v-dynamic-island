@@ -28,6 +28,10 @@
     "./style.css": "./dist/style.css",
     "./package.json": "./package.json"
   },
+  "files": [
+    "dist/*",
+    "README.md"
+  ],
   "scripts": {
     "dev": "vite",
     "docs": "vue-tsc --noEmit && vite build",
