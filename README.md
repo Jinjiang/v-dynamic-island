@@ -54,6 +54,10 @@ To be notice that the "little-pill" core area (roughly `137px` x `40px`) of the 
 
 https://jinjiang.dev/v-dynamic-island
 
+Source code:
+
+https://github.com/Jinjiang/v-dynamic-island/tree/main/src/examples
+
 ## Basic APIs
 
 ### Props
