@@ -20,9 +20,9 @@ const emit = defineEmits(['expand', 'collapse'])
     expanded: shown && expanded,
     warning,
     superLeading: {
-      top: 20,
-      left: 20,
-      size: 72
+      top: 10,
+      left: 0,
+      size: 100
     }
   }">
     <template #leading>
@@ -32,9 +32,7 @@ const emit = defineEmits(['expand', 'collapse'])
       <div style="padding: 10px">Ring</div>
     </template>
     <template #expanded>
-      <div @click="emit('collapse')">
-        <LargeContent />
-      </div>
+      <LargeContent @click="emit('collapse')" />
     </template>
     <template #expanded-trailing>
       <Label />

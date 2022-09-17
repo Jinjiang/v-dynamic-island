@@ -29,7 +29,7 @@ const emit = defineEmits(['expand', 'collapse'])
     </template>
     <template #expanded>
       <div @click="emit('collapse')">
-        Hello World!
+        Click to collapse
       </div>
     </template>
   </DynamicIsland>

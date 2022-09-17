@@ -364,7 +364,7 @@
   opacity: 0;
   filter: blur(4px);
 }
-.main,
+.main.main-init,
 .main-ready .main.main-enter-from,
 .main-ready .main.main-leave-to {
   transform:

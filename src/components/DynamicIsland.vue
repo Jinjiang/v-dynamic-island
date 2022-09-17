@@ -72,6 +72,7 @@ const mainReady = ref(false)
 const initMainSize: TransitionEventHandler = (el, done) => {
   const { height } = el.getBoundingClientRect()
   mainHeight.value = Math.max(height, DEFAULT_EXPANDED_HEIGHT)
+  el.classList.add('main-init')
   done()
   setTimeout(() => {
     mainReady.value = true
