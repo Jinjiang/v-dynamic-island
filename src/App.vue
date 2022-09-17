@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import GitHubCorner from './examples/GitHubCorner.vue';
 import DemoA from './examples/DemoA.vue';
 import DemoB from './examples/DemoB.vue';
 import DemoC from './examples/DemoC.vue';
@@ -62,6 +63,7 @@ const updateDemo = () => {
       @expand="expanded = true"
       @collapse="expanded = false" />
   </div>
+  <GitHubCorner url="https://github.com/Jinjiang/vue-dynamic-island" />
 </template>
 
 <style scoped>
